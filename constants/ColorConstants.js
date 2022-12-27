@@ -1,0 +1,8 @@
+export default {
+  COLOR_DARKEST: "#2D033B",
+  COLOR_DARK: "#810CA8",
+  COLOR_LIGHT: "#C147E9",
+  COLOR_LIGHTEST: "#E5B8F4",
+  COLOR_TEXT_LIGHT: "#fff",
+  COLOR_TEXT_DARK: "#000",
+};
