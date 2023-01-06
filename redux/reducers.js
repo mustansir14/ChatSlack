@@ -1,4 +1,4 @@
-import { SET_DATA } from "./actions";
+import { SET_DATA, SET_IS_LOGGED_IN } from "./actions";
 
 const initialState = {
   data: [
@@ -283,12 +283,15 @@ const initialState = {
       ],
     },
   ],
+  isLoggedIn: false,
 };
 
 function userReducer(state = initialState, action) {
   switch (action.type) {
     case SET_DATA:
       return { ...state, data: action.payload };
+    case SET_IS_LOGGED_IN:
+      return { ...state, isLoggedIn: action.payload };
     default:
       return state;
   }

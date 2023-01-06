@@ -5,17 +5,34 @@ import TitleText from "../components/TitleText";
 import FormInput from "../components/FormInput";
 import Button from "../components/Button";
 import ValidationText from "../components/ValidationText";
+import axios from "axios";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useDispatch } from "react-redux";
+import { setIsLoggedIn } from "../redux/actions";
 
 export default LoginScreen = ({ navigation }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isInvalid, setIsInvalid] = useState(false);
 
-  const onSubmit = () => {
-    if (username === "mustansir14" && password === "12345678") {
+  const dispatch = useDispatch();
+
+  const onSubmit = async () => {
+    try {
+      const res = await axios.post("https://dummyjson.com/auth/login", {
+        username,
+        password,
+      });
+      try {
+        await AsyncStorage.setItem("token", res.data.token);
+        dispatch(setIsLoggedIn(true));
+      } catch (error) {
+        console.log(error);
+      }
       setIsInvalid(false);
       navigation.navigate("Home");
-    } else {
+    } catch (error) {
+      console.log(error.response);
       setIsInvalid(true);
     }
   };
